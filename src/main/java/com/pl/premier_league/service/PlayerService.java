@@ -28,4 +28,9 @@ public class PlayerService {
     public List<Player> findByTeamAndPosition(String team, String pos){
         return playerRepo.findByTeamIgnoreCaseAndPosIgnoreCase(team, pos);
     }
+
+    public Player addPlayer(Player player) {
+        playerRepo.save(player);
+        return player;
+    }
 }

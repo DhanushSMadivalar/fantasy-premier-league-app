@@ -4,10 +4,9 @@ package com.pl.premier_league.controller;
 import com.pl.premier_league.entity.Player;
 import com.pl.premier_league.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,4 +36,11 @@ public class PlayerController {
     public List<Player> getByTeamAndPosition(@PathVariable String team,@PathVariable String pos){
         return playerService.findByTeamAndPosition(team, pos);
     }
+
+    @PostMapping
+    public ResponseEntity<Player> addPlayer(@RequestBody Player player){
+        Player createdPlayer = playerService.addPlayer(player);
+        return new ResponseEntity<>(createdPlayer, HttpStatus.CREATED);
+    }
+
 }
